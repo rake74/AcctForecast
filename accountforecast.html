@@ -3,146 +3,222 @@
 <title>Account Forecast (&beta;)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type='text/css'>
-body, table, td, select, input, p, li {
-	font-size: 10px;
-	font-family: "Lucida Console", Monaco, monospace;
+body, table, td, select, input, p, li
+{
+  font-size: 10px;
+  font-family: "Lucida Console", Monaco, monospace;
 }
-button, input {
-	width: 83px;
-	height: 22px;
-	text-align: center;
+
+button, input
+{
+  width: 83px;
+  height: 22px;
+  text-align: center;
 }
-.checkbox {
-	width: 12px;
-	height: 12px;
-	vertical-align: middle;
+
+.checkbox
+{
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
 }
-table {
-	border-collapse: collapse;
+
+table
+{
+  border-collapse: collapse;
 }
-.starts {
-	border: 0px;
-	padding: 0px;
+
+.starts
+{
+  border: 0;
+  padding: 0;
 }
-table, td, th {
-	border: 1px solid black;
+
+table, td, th
+{
+  border: 1px solid black;
 }
-td {
-	padding: 1px;
-	text-align: center;
-	vertical-align: middle;
+
+td
+{
+  padding: 1px;
+  text-align: center;
+  vertical-align: middle;
 }
-.left {
-	text-align: left;
+
+.left
+{
+  text-align: left;
 }
-.right {
-	text-align: right;
+
+.right
+{
+  text-align: right;
 }
-th {
-	background-color: #BBB;
+
+th
+{
+  background-color: #BBB;
 }
-ul {
-	list-style: square;
-	margin-left: 0;
+
+ul
+{
+  list-style: square;
+  margin-left: 0;
 }
-li ul {
-	margin-left: 0;
+
+li ul
+{
+  margin-left: 0;
 }
-.cp {
-	border: 1px dotted black;
-	width: 14px;
-	height: 12px;
-	display: inline-block;
-	-webkit-appearance: none;
+
+.grabber
+{
+  text-align: center;
+  vertical-align: middle;
 }
-.cp::-webkit-color-swatch-wrapper {
-	padding: 0;
+
+.colorpicker
+{
+  opacity: 0;
+  width: 14px;
+  height: 14px;
+  cursor: cell;
 }
-.cp::-webkit-color-swatch {
-	border: none;
+
+.colorpicker::-webkit-appearance
+{
+  border: none;
 }
-.x {
-	background-color: darkred;
-	font-weight: bold;
-	color: white;
-	border-radius: 3px;
-	border: solid 1px white;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
-	width: 12px;
-	height: 12px;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	display: inline-block;
+
+.colorpicker::-webkit-color-swatch-wrapper
+{
+  padding: 0;
 }
-.updn {
-	background-color: green;
-	font-weight: bold;
-	color: white;
-	border-radius: 3px;
-	border: solid 1px white;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
-	width: 12px;
-	height: 12px;
-	text-align: center;
-	vertical-align: middle;
-	cursor: pointer;
-	display: inline-block;
+
+.colorpicker::-webkit-color-swatch
+{
+  border: none;
 }
-.info {
-	color: #333333;
-	font-size: 10px;
+
+.x
+{
+  border-color: #999999;
+  background-color: darkred;
+  border-width: 1;
+  font-weight: 900;
+  color: white;
+  width: 12px;
+  height: 12px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-block;
 }
-.loadlabel {
-	width: 83;
-	text-align: center;
-	vertical-align: middle;
-	display: inline-block;
+
+.info
+{
+  color: #333333;
+  font-size: 10px;
 }
-.datefield {
-	width: 123px;
+
+.loadlabel
+{
+  width: 83;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
 }
-.balfield {
-	width: 123px;
+
+.datefield
+{
+  width: 123px;
 }
-.warnbutton {
-	background-color: #FF5555;
+
+.balfield
+{
+  width: 123px;
 }
-.outborder {
-	border-top: thin solid black;
-	border-bottom: thin solid black;
-	border-left: thin solid black;
-	border-right: thin solid black;
+
+.warnbutton
+{
+  background-color: #FF5555;
 }
-.outbordersep {
-	border-top: thick solid black;
-	border-bottom: thin solid black;
-	border-left: thin solid black;
-	border-right: thin solid black;
+
+.outborder
+{
+  border-top: thin solid black;
+  border-bottom: thin solid black;
+  border-left: thin solid black;
+  border-right: thin solid black;
 }
-.outborderlow {
-	border-top: thick ridge red;
-	border-bottom: thick ridge red;
-	border-left: thick ridge red;
-	border-right: thick ridge red;
+
+.outbordersep
+{
+  border-top: thick solid black;
+  border-bottom: thin solid black;
+  border-left: thin solid black;
+  border-right: thin solid black;
 }
-.lowpointer {
-	position: absolute;
-	height: 10px;
-	font-size: 10px;
-	font-weight: bold;
-	text-align: center;
-	width: 80px;
-	visibility: hidden;
-	z-index: 10;
-	border: 1px dashed red;
-	background-color: yellow;
+
+.outborderlow
+{
+  background-color: #ffcccc; /* semi-light red */
+  border: 2px dashed red !important;
 }
-.tooltip {
+.outborderhigh
+{
+  background-color: #ccffcc; /* semi-light green */
+  border: 2px dashed #00cc00 !important; /* bright green */
+}
+.outborderwarn
+{
+  background-color: #ffffcc; /* yellow */
+  border: 2px dashed red !important;
+}
+
+.pointer
+{
+  position: absolute;
+  height: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  width: 85px;
+  visibility: hidden;
+  z-index: 10;
+}
+
+.lowpointer
+{
+  border: 1px dashed red;
+  background-color: #ffcccc; /* semi-light red */
+}
+.highpointer
+{
+    border: 1px dashed #00cc00; /* bright green */
+    background-color: #ccffcc; /* semi-light green */
+}
+.warnpointer
+{
+    border: 1px dashed red;
+    background-color: #ffffcc; /* yellow */
+}
+
+.sorter
+{
+  cursor: grab;
+  width: 14px;
+}
+
+.tooltip
+{
   position: relative;
   display: inline-block;
 }
-.tooltip .tooltiptext {
+
+.tooltip .tooltiptext
+{
   visibility: hidden;
   width: 120;
   background-color: black;
@@ -153,8 +229,32 @@ li ul {
   position: absolute;
   z-index: 1;
 }
-.tooltip:hover .tooltiptext {
+
+.tooltip:hover .tooltiptext
+{
   visibility: visible;
+}
+
+.colorpickerContainer
+{
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+
+.colorpickerPen, .colorpickerTool
+{
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 900;
+}
+
+.colorpickerTool
+{
+  z-index: 10;
 }
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
@@ -164,34 +264,17 @@ function BadCell(aCell) {
 }
 
 function OkCell(aCell) {
-  aCell.bgColor = aCell.parentNode.cells[6].getElementsByClassName('cp')[0].value;
+  aCell.bgColor = aCell.parentNode.cells[7].getElementsByClassName('colorpicker')[0].value;
 }
 
-function SelectCellText(e) {
-  // see: http://forums.devshed.com/javascript-development-115/onclick-to-select-all-text-in-a-cell-825002.html
-  e = e || window.event;
-  var obj = e.target || e.srcElement;
-  if (obj.nodeName.toLowerCase() === 'td') {
-    if (document.selection) { // IE
-      var range = document.body.createTextRange();
-      range.moveToElementText(obj);
-      range.select();
-    } else if (window.getSelection) {
-      var range = document.createRange();
-      range.selectNode(obj.firstChild);
-      window.getSelection().addRange(range);
-    }
-  }
-}
-
-function removeTags(html) { // shamelessly stolen from http://stackoverflow.com/questions/295566/sanitize-rewrite-html-on-the-client-side/430240#430240
+function removeTags(html) { /* shamelessly stolen from http://stackoverflow.com/questions/295566/sanitize-rewrite-html-on-the-client-side/430240#430240 */
   var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
   var tagOrComment = new RegExp('<(?:'
-    // Comment body.
+    /* Comment body. */
     + '!--(?:(?:-*[^->])*--+|-?)'
-    // Special "raw text" elements whose content should be elided.
+    /* Special "raw text" elements whose content should be elided. */
     + '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*' + '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*'
-    // Regular name
+    /* Regular name */
     + '|/?[a-z]' + tagBody + ')>', 'gi');
   var oldHtml;
   do {
@@ -205,15 +288,14 @@ function BuildDataToSave() {
   var table = document.getElementById("InOutTableBody");
   buildData = "";
   for (var r = 0; r < table.rows.length; r++) {
-    for (var c = 0; c < table.rows[0].cells.length; c++) {
-      if (table.rows[0].cells[c].cellIndex < 6) {
+    /* this skips the first grabber column */
+    for (var c = 1; c < 8; c++) {
+      if (table.rows[0].cells[c].cellIndex < 7) {
         buildData = buildData + table.rows[r].cells[c].innerHTML + ",";
       } else {
-        buildData = buildData + table.rows[r].cells[c].getElementsByClassName('cp')[0].value + "\r\n";
+        buildData = buildData + table.rows[r].cells[c].getElementsByClassName('colorpicker')[0].value + "\r\n";
       }
     }
-    // remove the ending ',' after row reading ends
-    //		buildData = buildData.substring(0, buildData.length - 1) + '\r\n';
   }
   buildData = buildData + document.getElementById("StartDate").value + ",";
   buildData = buildData + document.getElementById("EndDate").value + ",DEFINE-STARTS,";
@@ -238,9 +320,8 @@ function ValidateCell(e) {
   var aCellVal = removeTags(aCellValRaw);
   aCell.innerHTML = aCellVal;
   var LowerVal = aCellVal.toLowerCase() || "";
-  if (aCell.cellIndex <= 1) { // start and end cols
-    if (aCell.cellIndex == 1) {
-      // var LowerVal = aCellVal.toLowerCase();
+  if (aCell.cellIndex <= 2) { /* start and end cols */
+    if (aCell.cellIndex == 2) {
       if (LowerVal == "none" || LowerVal === "") {
         aCell.innerHTML = "none";
         OkCell(aCell);
@@ -248,12 +329,12 @@ function ValidateCell(e) {
       }
     }
     var NumArr = aCellVal.match(/\d+\.?\d*/g);
-    // if count of numbers is none or more than 3, badcell
+    /* if count of numbers is none or more than 3, badcell */
     if (NumArr === null || NumArr.length > 3) {
       BadCell(aCell);
       return true;
     }
-    // if only 2 numbers provided and both are less than 2 digits, assume MM-DD so prefix YYYY
+    /* if only 2 numbers provided and both are less than 2 digits, assume MM-DD so prefix YYYY */
     if (NumArr.length == 2) {
       if (NumArr[0].length < 3 && NumArr[1].length < 3) {
         NumArr[2] = NumArr[1];
@@ -264,32 +345,32 @@ function ValidateCell(e) {
         return true;
       }
     }
-    // if 3rd number is 4 digits, assume year, move to front
+    /* if 3rd number is 4 digits, assume year, move to front */
     if (NumArr[2].length == 4) {
       tmpnum = NumArr[0];
       NumArr[0] = NumArr[2];
       NumArr[2] = NumArr[1];
       NumArr[1] = tmpnum;
     }
-    // if 2nd number is 1 digit, pad w/ 0
+    /* if 2nd number is 1 digit, pad w/ 0 */
     if (NumArr[1].length == 1) {
       NumArr[1] = "0" + NumArr[1];
     }
-    // if 3rd number is 1 digit, pad w/ 0
+    /* if 3rd number is 1 digit, pad w/ 0 */
     if (NumArr[2].length == 1) {
       NumArr[2] = "0" + NumArr[2];
     }
-    // if numbers don't match expected length, badcell
+    /* if numbers don't match expected length, badcell */
     if (NumArr[0].length != 4 || NumArr[1].length != 2 || NumArr[2].length != 2) {
       BadCell(aCell);
       return true;
     }
-    // rebuild number.
+    /* rebuild number. */
     aCell.innerHTML = NumArr[0] + "-" + NumArr[1] + "-" + NumArr[2];
     OkCell(aCell);
     return true;
   }
-  if (aCell.cellIndex == 2) { // name col
+  if (aCell.cellIndex == 3) { /* name col */
     if (aCellVal === "") {
       BadCell(aCell);
     } else {
@@ -301,7 +382,7 @@ function ValidateCell(e) {
     }
     return true;
   }
-  if (aCell.cellIndex == 3) { // freq col
+  if (aCell.cellIndex == 4) { /* freq col */
     if (aCellVal === "") {
       OkCell(aCell);
       return true;
@@ -312,12 +393,11 @@ function ValidateCell(e) {
       BadCell(aCell);
       return true;
     }
-    //		var LowerVal = aCellVal.toLowerCase();
     aCell.innerHTML = LowerVal;
     OkCell(aCell);
     return true;
   }
-  if (aCell.cellIndex >= 4) { // debit and credit cols
+  if (aCell.cellIndex >= 5) { /* debit and credit cols */
     if (aCellVal !== "" && isNaN(aCellVal)) {
       BadCell(aCell);
       return true;
@@ -330,69 +410,80 @@ function ValidateCell(e) {
   }
 }
 
-function CPChanged(aCell) { // not working for non-load data events. boo.
-  aRow = aCell.parentNode;
-  CellBG = aRow.cells[6].getElementsByClassName('cp')[0].value;
-  for (var c = 0; c < aRow.cells.length - 1; c++) {
+function colorpickerChanged(aColorpicker) {
+  aRow = aColorpicker.closest("tr");
+  CellBG = aColorpicker.value;
+  for (var c = 1; c < aRow.cells.length; c++) {
     aRow.cells[c].bgColor = CellBG;
   }
-  aRow.cells[6].bgColor = "#000000";
-  //	alert(aCell.parentNode.constructor.name);
 }
 
 function MakeCell(aRow, numCell, innerText, Editable) {
   Editable = Editable || "true";
   innerText = innerText || "";
   var aCell = aRow.insertCell(numCell);
-  if (numCell <= 5) {
+  if (numCell == 0) { /* grabber to move row */
+    aCell.innerHTML = innerText;
+    aCell.className = "sorter";
+    aCell.setAttribute('align', 'center');
+    aCell.setAttribute('valign', 'middle');
+    aCell.setAttribute('bgcolor', 'A9A9A9');
+  } else if (numCell <= 6) { /* user input fields  */
     aCell.innerHTML = innerText;
     aCell.setAttribute('contenteditable', Editable);
     aCell.addEventListener("blur", ValidateCell);
-    aCell.addEventListener("focus", SelectCellText);
-    aCell.addEventListener("click", SelectCellText);
-    if (numCell == 2) aCell.className = "left";
-    if (numCell >= 4) aCell.className = "right";
-  }
-  if (numCell == 6) {
-    DelOption = "<div onclick=\"DeleteRow\" class=\"x\">x</div>";
-    aCell.className = "left";
-    // create input element to append
-    var CPSel = document.createElement("input");
-    CPSel.setAttribute("type", "color");
-    CPSel.setAttribute("class", "cp");
+    if (numCell == 3) aCell.className = "left";
+    if (numCell >= 5) aCell.className = "right";
+  } else if (numCell == 7) { /* color picker */
+    /* container div for overlaid pen + tool divs */
+    var containerdiv = document.createElement("div");
+    containerdiv.setAttribute("class", "colorpickerContainer");
+    /* div for pen character */
+    var pendiv = document.createElement("div");
+    pendiv.setAttribute("class", "colorpickerPen");
+    pendiv.innerHTML = "&#128394;";
+    /* div for colorpicker input  */
+    var tooldiv = document.createElement("div");
+    tooldiv.setAttribute("class", "colorpickerTool");
+    /* colorpicker tool */
+    var colorpicker = document.createElement("input");
+    colorpicker.setAttribute("type", "color");
+    colorpicker.setAttribute("class", "colorpicker");
     if (innerText !== "") {
-      CPSel.setAttribute("value", innerText);
+      colorpicker.setAttribute("value", innerText);
     } else {
-      CPSel.setAttribute("value", "#F5F5F5");
+      colorpicker.setAttribute("value", "#F5F5F5");
     }
-    aCell.appendChild(CPSel);
-    // all so that we can add the onchange element and have it register as an event
-    CPSel.oninput = CPChanged(aCell);
-    // moving on with brute force/easier element additions
-    aCell.innerHTML = aCell.innerHTML + "<div onclick=\"MoveRowUpDn(this,'up')\": class=\"updn\">&#x25B2</div>";
-    aCell.innerHTML = aCell.innerHTML + "<div onclick=\"MoveRowUpDn(this,'dn')\": class=\"updn\">&#x25BC</div>";
-    aCell.innerHTML = aCell.innerHTML + "<div onclick=\"DeleteRow(this)\" class=\"x\">x</div>";
+    colorpicker.setAttribute("oninput", "colorpickerChanged(this)");
+    tooldiv.appendChild(colorpicker);
+    containerdiv.appendChild(pendiv);
+    containerdiv.appendChild(tooldiv);
+    aCell.appendChild(containerdiv);
+    /* all so that we can add the onchange element and have it register as an event */
+    colorpickerChanged(colorpicker);
+  } else if (numCell == 8) { /* delete row button */
+    aCell.className = "x";
+    aCell.innerHTML = "<div onclick=\"DeleteRow(this)\" class=\"x\">x</div>";
   }
 }
 
 function AddRow(LineArr) {
-  LineArr = LineArr || ["", "", "", "", "", "", ""];
+  LineArr = LineArr || ["", "", "", "", "", "", "", "", ""];
+  LineArr.unshift("&#9776;"); /* insert grabber to move */
   var IOTable = document.getElementById("InOutTableBody");
   var NewRow = IOTable.insertRow(IOTable.rows.length);
-  for (var x = 0; x < 7; x++) {
+  for (var x = 0; x < 9; x++) {
     MakeCell(NewRow, x, LineArr[x]);
   }
 }
 
 function SaveTable() {
   BuildDataToSave();
-  // better filename - not from above
   var now = new Date();
   var day = ("0" + now.getDate()).slice(-2);
   var month = ("0" + (now.getMonth() + 1)).slice(-2);
   var today = now.getFullYear() + "-" + (month) + "-" + (day);
   var FileName = "finances-" + today + ".csv";
-  // better file download mech - not from above. probably doesn't support IE. Good.
   var a = document.createElement('a');
   a.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(buildData);
   a.target = '_blank';
@@ -433,7 +524,6 @@ function LoadTable(DataIn) {
       }
     }
   }
-//  document.getElementById('files').innerHTML = document.getElementById('files').innerHTML;
 }
 
 function DeleteRow(DivObj) {
@@ -447,30 +537,6 @@ function DeleteRow(DivObj) {
   DivObj.parentNode.parentNode.parentNode.deleteRow(RowIndex - 1);
 }
 
-function MoveRowUpDn(DivObj, Dir) {
-  var DivRow = DivObj.parentNode.parentNode;
-  var DivParent = DivRow.parentNode;
-  if (Dir == "up") {
-    var PrevRow = DivRow.previousSibling;
-    DivParent.removeChild(DivRow);
-    DivParent.insertBefore(DivRow, PrevRow);
-  } else if (Dir == "dn") {
-    var RowIndex = DivRow.rowIndex;
-    var NextRow = DivRow.nextSibling;
-    var RowCount = DivRow.parentNode.rows.length;
-    DivParent.removeChild(DivRow);
-    if (RowIndex < RowCount) {
-      if (NextRow.nextSibling) {
-        DivParent.insertBefore(DivRow, NextRow.nextSibling);
-      } else {
-        DivParent.appendChild(DivRow);
-      }
-    } else {
-      DivParent.insertBefore(DivRow, DivParent.rows[0]);
-    }
-  }
-}
-
 function AlertRow(InR, InRowDesc, InText) {
   alert("Row " + (InR + 1) + " \"" + InRowDesc + "\":\n" + InText);
 }
@@ -478,64 +544,64 @@ function AlertRow(InR, InRowDesc, InText) {
 function BuildForecastArr() {
   ForecastArr = [];
   var table = document.getElementById("InOutTableBody");
-  for (var r = 0; r < table.rows.length; r++) { // validate rows - really just verify if there's no freq, and start and end aren't the same, error
-    if (table.rows[r].cells[3].innerHTML === "" && // no freq specified...
-      table.rows[r].cells[0].innerHTML != table.rows[r].cells[1].innerHTML) { // ... and start and end dates are NOT the same
-      AlertRow(r, table.rows[r].cells[2].innerHTML, "must have Start and End dates the same or Freq specified.");
+  for (var r = 0; r < table.rows.length; r++) { /* validate rows - really just verify if there's no freq, and start and end aren't the same, error */
+    if (table.rows[r].cells[4].innerHTML === "" && /* no freq specified... */
+      table.rows[r].cells[1].innerHTML != table.rows[r].cells[2].innerHTML) { /* ... and start and end dates are NOT the same */
+      AlertRow(r, table.rows[r].cells[3].innerHTML, "must have Start and End dates the same or Freq specified.");
       return false;
     }
   }
-  // get some starting points and validate
+  /* get some starting points and validate */
   var TStartEl = document.getElementById('StartDate');
   var TEndEl = document.getElementById('EndDate');
   var TBalEl = document.getElementById('StartBal');
-  if (TStartEl.value === "") { // set Start date to today if unset
+  if (TStartEl.value === "") { /* set Start date to today if unset */
     TStartEl.value = Date.today().toString('yyyy-MM-dd');
   }
-  if (TEndEl.value === "" || TEndEl.value < TStartEl.value) { // set End date to a year from today if unset or less than Start date
+  if (TEndEl.value === "" || TEndEl.value < TStartEl.value) { /* set End date to a year from today if unset or less than Start date */
     TEndEl.value = Date.parse(TStartEl.value).addYears(1).toString('yyyy-MM-dd');
   }
-  if (TBalEl.value === "") { //set balance to zero if unset
+  if (TBalEl.value === "") { /* set balance to zero if unset */
     TBalEl.value = 0;
   }
-  if (TBalEl.value != TBalEl.value.match(/[0-9.]*/)) { //set balance to zero if non-integer
+  if (TBalEl.value != TBalEl.value.match(/[0-9.]*/)) { /* set balance to zero if non-integer */
     TBalEl.value = 0;
   }
   TStart = new Date.parse(TStartEl.value);
   TEnd = new Date.parse(TEndEl.value);
   TBal = TBalEl.value;
-  for (var r = 0; r < table.rows.length; r++) { // start looping through rows!
-    var RowStart = new Date.parse(table.rows[r].cells[0].innerHTML);
-    var RowEnd = new Date.parse(table.rows[r].cells[1].innerHTML);
-    var RowDesc = table.rows[r].cells[2].innerHTML;
-    var RowFreqN = table.rows[r].cells[3].innerHTML.match(/[0-9]*/);
-    var RowFreqP = table.rows[r].cells[3].innerHTML.match(/[dDwWmMyY]/);
-    var RowDebit = table.rows[r].cells[4].innerHTML;
-    var RowCredit = table.rows[r].cells[5].innerHTML;
-    var RowColor = table.rows[r].cells[6].getElementsByClassName('cp')[0].value;
+  for (var r = 0; r < table.rows.length; r++) { /* start looping through rows! */
+    var RowStart = new Date.parse(table.rows[r].cells[1].innerHTML);
+    var RowEnd = new Date.parse(table.rows[r].cells[2].innerHTML);
+    var RowDesc = table.rows[r].cells[3].innerHTML;
+    var RowFreqN = table.rows[r].cells[4].innerHTML.match(/[0-9]*/);
+    var RowFreqP = table.rows[r].cells[4].innerHTML.match(/[dDwWmMyY]/);
+    var RowDebit = table.rows[r].cells[5].innerHTML;
+    var RowCredit = table.rows[r].cells[6].innerHTML;
+    var RowColor = table.rows[r].cells[7].getElementsByClassName('colorpicker')[0].value;
     if (!isFinite(RowStart)) {
       AlertRow(r, RowDesc, "Does not have a valid start date.");
       return false;
     }
-    if (RowStart > RowEnd) { // if row start is after end, set end = start
+    if (RowStart > RowEnd) { /* if row start is after end, set end = start */
       RowEnd = RowStart;
-      table.rows[r].cells[1].innerHTML = RowEnd.toString('yyyy-MM-dd');
+      table.rows[r].cells[2].innerHTML = RowEnd.toString('yyyy-MM-dd');
     }
-    if (RowStart > TEnd) { // if row start is after selected end, skip
+    if (RowStart > TEnd) { /* if row start is after selected end, skip */
       continue;
     }
-    // time to start looping through row increments
-    if (RowStart < TStart) { // find start of row - by row or by def
+    /* time to start looping through row increments */
+    if (RowStart < TStart) { /* find start of row - by row or by def */
       var StartReal = TStart;
     } else {
       var StartReal = RowStart;
     }
-    if (RowEnd !== "" && RowEnd < TEnd) { // find end of row - by row or by def thankfully (blank & letters are < numbers)
+    if (RowEnd !== "" && RowEnd < TEnd) { /* find end of row - by row or by def thankfully (blank & letters are < numbers) */
       var EndReal = RowEnd;
     } else {
       var EndReal = TEnd;
     }
-    if (RowStart.valueOf() !== RowEnd.valueOf()) { // validate RowFreq[N|P] - important since we're not looping
+    if (RowStart.valueOf() !== RowEnd.valueOf()) { /* validate RowFreq[N|P] - important since we're not looping */
       if (typeof RowFreqN === 'undefined' || RowFreqN == "" || RowFreqN < 0) {
         AlertRow(r, RowDesc, "Freq amount less than 1.\nSetting to 1.");
         RowFreqN = 1;
@@ -544,7 +610,6 @@ function BuildForecastArr() {
         RowFreqN = Math.round(RowFreqN);
         AlertRow(r, RowDesc, "Freq amount non-integer.\nRounded to: " + RowFreqN);
       }
-      //console.log("RowFreqN: " + RowFreqN);
       if (typeof RowFreqP === 'undefined' || RowFreqP == "") {
         AlertRow(r, RowDesc, "Freq type missing.\nSetting to m (month).");
         RowFreqP = "m";
@@ -553,12 +618,12 @@ function BuildForecastArr() {
         AlertRow(r, RowDesc, "Freq type invalid: " + RowFreqP + "\nSetting to m (month).");
         RowFreqP = "m";
       }
-      table.rows[r].cells[3].innerHTML = RowFreqN.toString() + RowFreqP;
+      table.rows[r].cells[4].innerHTML = RowFreqN.toString() + RowFreqP;
     } else {
       RowFreqP = "none"
     }
     ThisDate = RowStart;
-    do { // start looping 'x periods' through range
+    do { /* start looping 'x periods' through range */
       if (ThisDate.between(StartReal, EndReal)) {
         FCLen = ForecastArr.length;
         ForecastArr[FCLen] = new Array;
@@ -571,15 +636,15 @@ function BuildForecastArr() {
       }
       var timewarp = 1 * RowFreqN;
       if (timewarp == 0) timewarp = 1;
-      //console.log("Row:" + r + " - RowFreqN: " + RowFreqN + " - RowFreqP: " + RowFreqP + " - ThisDate: " + ThisDate.toString('yyyy-MM-dd') + " - StartReal: " + StartReal.toString('yyyy-MM-dd') + " - EndReal: " + EndReal.toString('yyyy-MM-dd') + " - Desc: " + RowDesc);
-      if (RowFreqP == "none") break; // no frequency means run once and we're done with row.
+      /* console.log("Row:" + r + " - RowFreqN: " + RowFreqN + " - RowFreqP: " + RowFreqP + " - ThisDate: " + ThisDate.toString('yyyy-MM-dd') + " - StartReal: " + StartReal.toString('yyyy-MM-dd') + " - EndReal: " + EndReal.toString('yyyy-MM-dd') + " - Desc: " + RowDesc); */
+      if (RowFreqP == "none") break; /* no frequency means run once and we're done with row. */
       if (RowFreqP == "d") ThisDate.addDays(timewarp);
       if (RowFreqP == "w") ThisDate.addWeeks(timewarp);
       if (RowFreqP == "m") ThisDate.addMonths(timewarp);
       if (RowFreqP == "y") ThisDate.addYears(timewarp);
-    } while (ThisDate.toString('yyyy-MM-dd') <= EndReal.toString('yyyy-MM-dd')); // end of looping 'x period' through range
+    } while (ThisDate.toString('yyyy-MM-dd') <= EndReal.toString('yyyy-MM-dd')); /* end of looping 'x period' through range */
   }
-  ForecastArr.sort(function(a, b) { // sort by date and description simultaneously. lazy+fast
+  ForecastArr.sort(function(a, b) { /* sort by date and description simultaneously. lazy+fast */
     colsA = a[0] + a[1];
     colsB = b[0] + b[1];
     return colsA.toLowerCase().localeCompare(colsB.toLowerCase());
@@ -590,40 +655,47 @@ function BuildForecastArr() {
 
 function ClearForecastTable() {
   ForeCastClear = document.getElementById("forecastTrack");
-  while (ForeCastClear.hasChildNodes()) { // .. clear it out first
+  while (ForeCastClear.hasChildNodes()) { /* .. clear it out first */
     ForeCastClear.removeChild(ForeCastClear.lastChild);
   }
-  LowPointer = document.getElementById("lowpointer");
-  LowPointer.style.left = 0;
-  LowPointer.style.top = 0;
-  LowPointer.style.visibility = 'hidden';
+  var pointers = ["lowpointer", "highpointer", "warnpointer"];
+  pointers.forEach(function(p) {
+    var pointerEl = document.getElementById(p);
+	if (pointerEl) {
+		pointerEl.style.left = 0;
+		pointerEl.style.top = 0;
+		pointerEl.style.visibility = 'hidden';
+	}
+  });
 }
 
-function DrawForecastTable() { // ------------- DRAW THE TABLE! -------------
-  { // gotta put table somewhere
+function DrawForecastTable() { /* ------------- DRAW THE TABLE! ------------- */
+  { /* gotta put table somewhere */
     StatusF = document.getElementById("forecastTrack");
-    ClearForecastTable(); { // add header rows to array
+    ClearForecastTable(); { /* add header rows to array */
       ForecastArr.unshift(["", "Start Balance", "", StartBal.value, "", "#BBBBBB"]);
       ForecastArr.unshift(["Date", "Description", "Out", "In", "Bal", "#BBBBBB"]);
     }
-  } { // create table/tbody, set some vars
+  } { /* create table/tbody, set some vars */
     var OutTable = document.createElement('table');
     var OTBody = document.createElement('tbody');
     var BalTrack = 0;
     LastMonth = "start things off";
     LowestRow = 0;
-    ForecastArr[LowestRow][6] = "";
+    LowestBal = StartBal.value;
+    HighestRow = 0;
+    HighestBal = StartBal.value;
     FirstNegRow = 0
     OutTable.appendChild(OTBody);
     StatusF.appendChild(OutTable);
   }
-  for (var r = 0; r < ForecastArr.length; r++) { // dump the arr. do some math along the way.
+  for (var r = 0; r < ForecastArr.length; r++) { /* dump the arr. do some math along the way. */
     var NewRow = document.createElement('tr');
     NewRow.style.backgroundColor = ForecastArr[r][5];
     for (var c = 0; c < 5; c++) {
       var NewCell = document.createElement('td');
       var MyText = ForecastArr[r][c];
-      if (r > 0) { // track that balance, show me what you're working with
+      if (r > 0) { /* track that balance, show me what you're working with */
         if (MyText !== "" && 1 < c && c < 4) {
           if (c == 2) {
             BalTrack = Number(BalTrack * 1 - parseFloat(ForecastArr[r][c])).toFixed(2);
@@ -633,8 +705,15 @@ function DrawForecastTable() { // ------------- DRAW THE TABLE! -------------
           }
         }
         ForecastArr[r][6] = BalTrack;
-        if (BalTrack < ForecastArr[LowestRow][6]) { // track the lowest balance
-          LowestRow = r * 1;
+        if (r > 1) {
+          if (parseFloat(BalTrack) < LowestBal) { /* track the lowest balance  */
+            LowestRow = r;
+            LowestBal = BalTrack;
+          }
+          if (parseFloat(BalTrack) > HighestBal) { /* track the highest balance */
+            HighestRow = r;
+            HighestBal = BalTrack;
+          }
         }
         if (MyText !== "") {
           switch (c) {
@@ -650,13 +729,13 @@ function DrawForecastTable() { // ------------- DRAW THE TABLE! -------------
               break;
           }
         }
-        if (BalTrack < 0) { // if negative, italicize. track first negative row too.
+        if (BalTrack < 0) { /* if negative, italicize. track first negative row too. */
           NewCell.style.fontStyle = "italic";
-          if (FirstNegRow != 0) FirstNegRow = r * 1;
+          if (FirstNegRow == 0) FirstNegRow = r * 1;
         }
       }
       NewCell.appendChild(document.createTextNode(MyText));
-      if (c < 2) { // first 2 columns left aligned, the rest right aligned
+      if (c < 2) { /* first 2 columns left aligned, the rest right aligned */
         NewCell.className = "left";
       } else {
         NewCell.className = "right";
@@ -664,31 +743,45 @@ function DrawForecastTable() { // ------------- DRAW THE TABLE! -------------
       NewRow.appendChild(NewCell);
     }
     CurMonth = ForecastArr[r][0].split("-")[1];
-    if (CurMonth != LastMonth && r > 1) { // separate months
+    if (CurMonth != LastMonth && r > 1) { /* separate months */
       NewRow.className = "outbordersep";
       LastMonth = CurMonth;
     } else {
       NewRow.className = "outborder";
     }
     OTBody.appendChild(NewRow);
-  } { // highlight lowest balance row
-    for (c = 0; c < 5; c++) {
-      OTBody.rows[LowestRow].cells[c].style.fontWeight = "bold";
-    }
-    OTBody.rows[LowestRow].className = "outborderlow";
-    PosX = OutTable.offsetLeft + OTBody.rows[LowestRow].offsetLeft + OTBody.rows[LowestRow].offsetWidth + 7;
-    PosY = OutTable.offsetTop + OTBody.rows[LowestRow].offsetTop + Math.round(OTBody.rows[LowestRow].offsetHeight / 2) - 7;
-    lowpointer = document.getElementById("lowpointer");
-    lowpointer.style.visibility = 'visible';
-    lowpointer.style.left = PosX + "px";
-    lowpointer.style.top = PosY + "px";
   }
+
+  { /* highlight special rows and position pointers */
+    function applyHighlight(rowIndex, className, pointerId) {
+        if (rowIndex > 0) { // rowIndex 0 is header, 1 is start balance
+            var row = OTBody.rows[rowIndex];
+            row.className += " " + className; // Append class to not overwrite month separators
+            for (var c = 0; c < 5; c++) {
+                row.cells[c].style.fontWeight = "bold";
+            }
+
+            var pointer = document.getElementById(pointerId);
+            var PosX = OutTable.offsetLeft + row.offsetLeft + row.offsetWidth + 7;
+            var PosY = OutTable.offsetTop + row.offsetTop + Math.round(row.offsetHeight / 2) - 7;
+
+            pointer.style.visibility = 'visible';
+            pointer.style.left = PosX + "px";
+            pointer.style.top = PosY + "px";
+        }
+    }
+
+    applyHighlight(HighestRow, "outborderhigh", "highpointer");
+    applyHighlight(FirstNegRow, "outborderwarn", "warnpointer");
+    applyHighlight(LowestRow, "outborderlow", "lowpointer");
+  }
+
   ClearButton = document.createElement('button');
   ClearButton.className = "warnbutton";
   ClearButton.innerHTML = "Clear Forecast";
   ClearButton.onclick = ClearForecastTable;
-  ClearButton.style.width='160px';
-  ClearButton.style.height='44px';
+  ClearButton.style.width = '160px';
+  ClearButton.style.height = '44px';
   StatusF.appendChild(ClearButton);
 }
 
@@ -701,13 +794,15 @@ window.onload = function() {
   var filesInput = document.getElementById("files");
   var LoadInfo = document.getElementById("LoadInfo");
   filesInput.addEventListener(
-    "change", function(event) {
-      var files = event.target.files; //FileList object
+    "change",
+    function(event) {
+      var files = event.target.files; /* FileList object */
       var output = document.getElementById("result");
       var file = files[0];
       var reader = new FileReader();
       reader.addEventListener(
-        "load", function(event) {
+        "load",
+        function(event) {
           var textFile = event.target;
           var div = document.createElement("div");
           FileIn = textFile.result;
@@ -727,29 +822,31 @@ window.onload = function() {
 </script>
 </head>
 <body>
-<table class='starts'>
-  <tr class='starts'>
-    <td class='starts' rowspan='3'><button onclick="Forecast()" style="width:150;height:66">Forecast</button></td>
-    <td class='starts' rowspan='3' width='2'></td>
-    <td class='starts right' width='68'>Start Date:</td>
-    <td class='starts'><input class="datefield" id="StartDate" type="date"></td>
-  </tr>
-  <tr class='starts'>
-    <td class='starts right'>End Date:</td>
-    <td class='starts'><input class="datefield" id="EndDate" type="date"></td>
-  </tr>
-  <tr class='starts'>
-    <td class='starts right'>Balance:</td>
-    <td class='starts'><input class="balfield" id="StartBal" type="number"></td>
-  </tr>
-</table>
-<table id="InOutTable">
-  <thead>
-    <tr id="HeadRow">
-      <th>Start</th>
-      <th>End</th>
-      <th>Name</th>
-      <th><div class="tooltip">Freq<span class="tooltiptext">
+  <table class='starts'>
+    <tr class='starts'>
+      <td class='starts' rowspan='3'><button onclick="Forecast()" style="width:150;height:66">Forecast</button></td>
+      <td class='starts' rowspan='3' width='2'></td>
+      <td class='starts right' width='68'>Start Date:</td>
+      <td class='starts'><input class="datefield" id="StartDate" type="date"></td>
+    </tr>
+    <tr class='starts'>
+      <td class='starts right'>End Date:</td>
+      <td class='starts'><input class="datefield" id="EndDate" type="date"></td>
+    </tr>
+    <tr class='starts'>
+      <td class='starts right'>Balance:</td>
+      <td class='starts'><input class="balfield" id="StartBal" type="number"></td>
+    </tr>
+  </table>
+  <table id="InOutTable">
+    <thead>
+      <tr id="HeadRow">
+        <th bgcolor='A9A9A9'>&#9776;</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Name</th>
+        <th>
+          <div class="tooltip">Freq<span class="tooltiptext">
         Recurrance:
 <pre class='left'>
  [every][period]
@@ -758,25 +855,22 @@ window.onload = function() {
  4w - every 4 weeks
 14d - every 14 days
 </pre>
-      </span></div></th>
-      <th>Debit</th>
-      <th>Credit</th>
-      <th>Do</th>
-    </tr>
-  </thead>
-  <tbody id="InOutTableBody"></tbody>
-</table>
+      </span></div>
+        </th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th colspan=2>Do</th>
+      </tr>
+    </thead>
+    <tbody id="InOutTableBody"></tbody>
+  </table>
 
- <button onclick="AddRow()">Add Row</button
-><button onclick="ClearTable('Clearing table: Are you sure?')" class="warnbutton">Clear</button
-><label class="info"><input type="checkbox" id="nosafe" value="unchecked" class="checkbox">No confirmation</label>
-<button onclick="SaveTable()">Save</button
-><input type="file" id="files" accept=".csv" class="files" style='visibility: hidden; width: 0px;'
-><button onclick="document.getElementById('files').click();">Load</button>
+  <button onclick="AddRow()">Add Row</button><button onclick="ClearTable('Clearing table: Are you sure?')" class="warnbutton">Clear</button><label class="info"><input type="checkbox" id="nosafe" value="unchecked" class="checkbox">No confirmation</label>
+  <button onclick="SaveTable()">Save</button><input type="file" id="files" accept=".csv" class="files" style='visibility: hidden; width: 0px;'><button onclick="document.getElementById('files').click();">Load</button>
 
-<div id="LoadInfo" class="info"></div>
-<div id="forecastTrack"></div>
-<!--
+  <div id="LoadInfo" class="info"></div>
+  <div id="forecastTrack"></div>
+  <!--
 <ul>
 	<li>Start and End are dates.</li>
 	<li>Date format: YYYY-MM-DD.</li>
@@ -792,20 +886,32 @@ window.onload = function() {
 	</ul>
 </ul>
 -->
-<div id="lowpointer" class="lowpointer"> &larr; Low &larr; </div>
-<p><b>** KNOWN BUGS **</b></p>
-<pre class='left' style="white-space: pre-wrap;">
-1) when using months periods (Nm) and next calculated date exceeds days in a month, the date is thereafter modified.
+  <div id="lowpointer" class="pointer lowpointer"> &larr; Minimum &larr; </div>
+  <div id="highpointer" class="pointer highpointer"> &larr; Maximum &larr; </div>
+  <div id="warnpointer" class="pointer warnpointer"> &larr; Warning &larr; </div>
+  <p><b>** KNOWN BUGS **</b></p>
+  <ol type='1'>
+    <li>
+      <pre class='left' style="white-space: pre-wrap;">
+When using months periods (Nm) and next calculated date exceeds days in a month, the date is thereafter modified.
 
 example: recurrance 1m on 31st hits 30 day month, then uses 30 thereafter, and again when it hits February, using 28 thereafter.
 
 This does not affect year (y), week (w), or days (d) periods.
 This is an artifact of work being performed via "add period to last date" - when Feb 31st is encountered 'addMonths' function in date.min.js returns sane date.
 A fix is not immediately apparent and affects a small slice of data moving certain items up to 3 days earlier.
-
-2) lowest value indicator does not currently function
-
+</pre>
+    </li>
+  </ol>
+  <pre class='left' style="white-space: pre-wrap;">
 Report bugs to rake74@hotmail.com
 </pre>
+  <script src="RowSorter/RowSorter.js"></script>
+  <script>
+    RowSorter("#InOutTable", {
+      handler: 'td.sorter',
+      dragClass: 'sorting-row'
+    });
+  </script>
 </body>
 </html>
