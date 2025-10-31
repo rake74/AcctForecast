@@ -1,0 +1,3 @@
+https://github.com/arteyazilim/rowsorter
+
+Referenced/found via https://www.jqueryscript.net/table/touch-table-row-sorter.html
