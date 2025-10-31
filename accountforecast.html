@@ -65,6 +65,7 @@ ul
 {
   list-style: square;
   margin-left: 0;
+  padding-left: 20px;
 }
 
 li ul
@@ -209,30 +210,6 @@ li ul
 {
   cursor: grab;
   width: 14px;
-}
-
-.tooltip
-{
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext
-{
-  visibility: hidden;
-  width: 120;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5 0;
-  border-radius: 6;
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext
-{
-  visibility: visible;
 }
 
 .colorpickerContainer
@@ -554,7 +531,7 @@ function BuildForecastArr() {
   const TEnd = new Date.parse(TEndEl.value);
 
   for (let r = 0; r < table.rows.length; r++) {
-    let RowStart = new Date.parse(table.rows[r].cells[START_DATE_COL].innerHTML);
+    const RowStart = new Date.parse(table.rows[r].cells[START_DATE_COL].innerHTML);
     let RowEnd = new Date.parse(table.rows[r].cells[END_DATE_COL].innerHTML);
     const RowDesc = table.rows[r].cells[NAME_COL].innerHTML;
     let RowFreqN = table.rows[r].cells[FREQ_COL].innerHTML.match(/[0-9]*/);
@@ -574,17 +551,17 @@ function BuildForecastArr() {
     if (RowStart > TEnd) continue;
 
     const StartReal = (RowStart < TStart) ? TStart : RowStart;
-    const EndReal = (RowEnd !== "" && RowEnd < TEnd) ? RowEnd : TEnd;
+    const EndReal = (RowEnd && isFinite(RowEnd) && RowEnd < TEnd) ? RowEnd : TEnd;
 
     let RowFreqPVal = "none";
     if (RowStart.valueOf() !== RowEnd.valueOf()) {
-      if (!RowFreqN || RowFreqN < 0) {
+      if (!RowFreqN || RowFreqN < 1) {
           AlertRow(r, RowDesc, "Freq amount less than 1.\nSetting to 1.");
           RowFreqN = 1;
       }
       if (RowFreqN % 1 !== 0) {
           RowFreqN = Math.round(RowFreqN);
-          AlertRow(r, RowDesc, "Freq amount non-integer.\nRounded to: " + RowFreqN);
+          AlertRow(r, RowDesc, `Freq amount non-integer.\nRounded to: ${RowFreqN}`);
       }
       if (!RowFreqP || "dwmy".indexOf(RowFreqP[0].toLowerCase()) === -1) {
           AlertRow(r, RowDesc, "Freq type invalid or missing.\nSetting to m (month).");
@@ -594,20 +571,27 @@ function BuildForecastArr() {
       table.rows[r].cells[FREQ_COL].innerHTML = `${RowFreqN}${RowFreqPVal}`;
     }
 
-    let ThisDate = RowStart;
-    do {
-      if (ThisDate.between(StartReal, EndReal)) {
-        ForecastArr.push([
-          ThisDate.toString('yyyy-MM-dd'), RowDesc, RowDebit, RowCredit, 0, RowColor
-        ]);
+    if (RowFreqPVal === "none") {
+      if (RowStart.between(StartReal, EndReal)) {
+        ForecastArr.push([RowStart.toString('yyyy-MM-dd'), RowDesc, RowDebit, RowCredit, 0, RowColor]);
       }
-      if (RowFreqPVal === "none") break;
-      const timewarp = 1 * RowFreqN || 1;
-      if (RowFreqPVal == "d") ThisDate.addDays(timewarp);
-      if (RowFreqPVal == "w") ThisDate.addWeeks(timewarp);
-      if (RowFreqPVal == "m") ThisDate.addMonths(timewarp);
-      if (RowFreqPVal == "y") ThisDate.addYears(timewarp);
-    } while (ThisDate <= EndReal);
+    } else {
+      for (let i = 0; ; i++) {
+        const nextDate = new Date(RowStart);
+        const timewarp = i * (RowFreqN || 1);
+
+        if (RowFreqPVal == "d") nextDate.addDays(timewarp);
+        else if (RowFreqPVal == "w") nextDate.addWeeks(timewarp);
+        else if (RowFreqPVal == "m") nextDate.addMonths(timewarp);
+        else if (RowFreqPVal == "y") nextDate.addYears(timewarp);
+
+        if (nextDate > EndReal) break;
+
+        if (nextDate.between(StartReal, EndReal)) {
+            ForecastArr.push([nextDate.toString('yyyy-MM-dd'), RowDesc, RowDebit, RowCredit, 0, RowColor]);
+        }
+      }
+    }
   }
   ForecastArr.sort((a, b) => (a[0] + a[1]).toLowerCase().localeCompare((b[0] + b[1]).toLowerCase()));
   SaveBuildData();
@@ -803,18 +787,7 @@ window.onload = function() {
         <th>Start</th>
         <th>End</th>
         <th>Name</th>
-        <th>
-          <div class="tooltip">Freq<span class="tooltiptext">
-        Recurrance:
-<pre class='left'>
- [every][period]
- 1y - every 1 years
- 2m - every 2 months
- 4w - every 4 weeks
-14d - every 14 days
-</pre>
-      </span></div>
-        </th>
+        <th>Freq</th>
         <th>Debit</th>
         <th>Credit</th>
         <th colspan=2>Do</th>
@@ -831,20 +804,31 @@ window.onload = function() {
   <div id="lowpointer" class="pointer lowpointer"> &larr; Minimum &larr; </div>
   <div id="highpointer" class="pointer highpointer"> &larr; Maximum &larr; </div>
   <div id="warnpointer" class="pointer warnpointer"> &larr; Warning &larr; </div>
-  <p><b>** KNOWN BUGS **</b></p>
-  <ol type='1'>
-    <li>
-      <pre class='left' style="white-space: pre-wrap;">
-When using months periods (Nm) and next calculated date exceeds days in a month, the date is thereafter modified.
 
-example: recurrance 1m on 31st hits 30 day month, then uses 30 thereafter, and again when it hits February, using 28 thereafter.
+  <hr>
+  <details>
+    <summary>Help / Formatting Guide</summary>
+    <div style="padding: 10px;">
+        <h4>Date Columns (Start / End)</h4>
+        <ul>
+            <li>Dates in the main table must be entered in <b>YYYY-MM-DD</b> format.</li>
+            <li>The 'End' date column can also accept the value '<b>none</b>'.</li>
+            <li><b>Note:</b> The main "Start Date" and "End Date" fields at the top of the page may display in a different format (e.g., MM/DD/YYYY) based on your browser or system settings. This is normal.</li>
+        </ul>
+        <h4>Freq (Frequency) Column</h4>
+        <ul>
+            <li>Frequency is specified as a number followed by a time period character. Examples:</li>
+            <ul style="list-style: none;">
+                <li><code>1y</code> - every 1 year</li>
+                <li><code>2m</code> - every 2 months</li>
+                <li><code>4w</code> - every 4 weeks</li>
+                <li><code>14d</code> - every 14 days</li>
+            </ul>
+        </ul>
+    </div>
+  </details>
+  <hr>
 
-This does not affect year (y), week (w), or days (d) periods.
-This is an artifact of work being performed via "add period to last date" - when Feb 31st is encountered 'addMonths' function in date.min.js returns sane date.
-A fix is not immediately apparent and affects a small slice of data moving certain items up to 3 days earlier.
-</pre>
-    </li>
-  </ol>
   <pre class='left' style="white-space: pre-wrap;">
 Report bugs to rake74@hotmail.com
 </pre>
