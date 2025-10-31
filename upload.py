@@ -43,7 +43,7 @@ def main():
     if not api_key:
         print("Error: API key not found.")
         return
-    
+
     print(f"Successfully loaded API key from {key_source}.")
 
     # 3. Read the file content and inject the timestamp
@@ -56,10 +56,10 @@ def main():
         now_utc = datetime.now(timezone.utc)
         # Format as ISO 8601 with whole seconds and 'Z' for UTC
         timestamp_str = now_utc.strftime('%Y-%m-%dT%H:%M:%SZ')
-        
+
         # Create the HTML snippet
         timestamp_html = f"<pre>Updated: {timestamp_str}</pre>\n</body>"
-        
+
         # Inject the snippet before the closing body tag
         if '</body>' in file_content:
             print(f"Injecting timestamp: {timestamp_str}")
@@ -70,11 +70,11 @@ def main():
 
         client = Neocities()
         client.login(api=api_key)
-        
+
         print(f"Uploading content to '{args.sitename}' as '{args.destination}'...")
-        
+
         client.upload_text({args.destination: file_content})
-        
+
         print("Upload successful!")
         print(f"View live at: https://{args.sitename}.neocities.org/{args.destination}")
 
